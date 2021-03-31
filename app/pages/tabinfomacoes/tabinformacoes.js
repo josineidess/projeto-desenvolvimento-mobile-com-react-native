@@ -7,7 +7,6 @@ import { mudarId } from "../../service/Servico";
 
 import InformacaoProduto from "../informacoesdoproduto/informacoes_produto";
 import Comentarios from "../comentarios/comentarios";
-import { HeaderTitle } from "@react-navigation/stack";
 
 const Tab = createBottomTabNavigator();
 

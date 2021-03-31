@@ -1,16 +1,13 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { Title, Paragraph, Card } from "react-native-paper";
 
 export default function Produto(props) {
   return (
     <View style={styles.container}>
       <Card
         style={styles.cardbox}
-        onPress={() =>
-          props.navegar.navigate("TabInformacoes", { id: props.id })
-        }
+        onPress={() => props.navegar.navigate("Informações", { id: props.id })}
       >
         <Card.Content style={styles.card}>
           <Card.Cover
