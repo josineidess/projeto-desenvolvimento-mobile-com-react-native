@@ -1,14 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
 
 import CardComentario from "../../components/CardComentario";
 
 import { getComentarios } from "../../service/Servico";
 
 import { getId } from "../../service/Servico";
-import { mudarTitulo } from "../../service/Servico";
 
 export default function Comentarios({ navigation }) {
   const id = getId();

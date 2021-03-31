@@ -1,16 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  ImageBackground,
-} from "react-native";
-
-import { createStackNavigator } from "@react-navigation/stack";
-
-import TabInformacoes from "../tabinfomacoes/tabinformacoes";
+import { StyleSheet, View, FlatList } from "react-native";
 
 import CardProduto from "../../components/CardProduto";
 
