@@ -1,12 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, RefreshControl, Text, View, FlatList } from "react-native";
 
 import CardComentario from "../../components/CardComentario";
 
 import { getComentarios } from "../../service/Servico";
 
 import { getId } from "../../service/Servico";
+import { pegar_estado } from "../../service/Servico";
 
 export default function Comentarios({ navigation }) {
   const id = getId();
@@ -32,7 +33,12 @@ export default function Comentarios({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={false} onRefresh={pegar_estado} />
+      }
+    >
       <StatusBar style="auto" />
       <FlatList
         style={styles.flatlist}

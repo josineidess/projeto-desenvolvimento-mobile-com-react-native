@@ -3,6 +3,9 @@ const express = require("express");
 const app = express();
 var cors = require("cors");
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 const port = 3000;
 
 const produtos = [
@@ -49,7 +52,46 @@ const produtos = [
   },
 ];
 
-const comentarios = [
+const usuarios = [
+  {
+    id: 1,
+    nome: "Rúbeo Hagrid",
+    foto:
+      "https://static.wikia.nocookie.net/enciclopotterpedia/images/d/dc/Rubeushagrid.png/revision/latest/scale-to-width-down/340?cb=20141214132015&path-prefix=pt-br",
+  },
+  {
+    id: 2,
+    nome: "Alvo Dumbledore",
+    foto:
+      "https://pm1.narvii.com/6291/4bb4937b44867819ddff5bbaeb44b238ca74fb16_hq.jpg",
+  },
+  {
+    id: 3,
+    nome: "Gina Weasley",
+    foto:
+      "https://i.pinimg.com/474x/ac/c5/f3/acc5f384f292daf68c240589d855f683.jpg",
+  },
+  {
+    id: 4,
+    nome: "Fred Weasley",
+    foto:
+      "https://uploads.spiritfanfiction.com/fanfics/historias/202012/como-conquistar-um-weasley-em-60-dias-21231765-121220202154.jpg",
+  },
+  {
+    id: 5,
+    nome: "Horácio Slughorn",
+    foto:
+      "https://i.pinimg.com/originals/68/3c/12/683c123abbf2c9f4e12383122a20f5a6.jpg",
+  },
+  {
+    id: 6,
+    nome: "Sirius Black",
+    foto:
+      "https://i.pinimg.com/originals/fa/16/6e/fa166ee361323806e6f70bafe57b48ef.jpg",
+  },
+];
+
+var comentarios = [
   {
     id: "1",
     idProduto: "5",
@@ -159,6 +201,21 @@ app.get("/produtos/:id/comentarios", function (req, res) {
     }
   });
   res.send(coment);
+});
+
+app.post("/produtos/:id/comentarios", (req, res) => {
+  console.log(req.body);
+  const novo_comentario = req.body;
+  novo_comentario.id = String(comentarios.length + 1);
+  novo_comentario.idProduto = String(req.params.id);
+  comentarios.push(novo_comentario);
+  res.status(200).send(produtos);
+});
+
+app.delete("/produtos/:id", (req, res) => {
+  produtos = produtos.filter((produto) => produto.id != req.params.id);
+  console.log("Produto apagado!");
+  res.send(produtos);
 });
 
 app.listen(port, () => {

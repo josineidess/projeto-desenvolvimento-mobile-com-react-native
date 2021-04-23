@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   NavigationContainer,
@@ -9,6 +9,9 @@ import {
 
 import Home from "./pages/home/home";
 import TabInformacoes from "./pages/tabinfomacoes/tabinformacoes";
+import { Button } from "react-native-paper";
+
+import CadastroComentario from "./pages/cadastro/cadastro";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +26,20 @@ function getTitulo(route) {
   }
 }
 
+function aparecerBotao(route, navigation) {
+  const rota = getFocusedRouteNameFromRoute(route) ?? "Informações";
+  switch (rota) {
+    case "Informações":
+      return null;
+    case "Comentarios":
+      return (
+        <Button onPress={() => navigation.navigate("Cadastro", navigation)}>
+          <Ionicons name="add-circle-outline" size={30} />
+        </Button>
+      );
+  }
+}
+
 function MyStack() {
   return (
     <Stack.Navigator
@@ -31,12 +48,14 @@ function MyStack() {
     >
       <Stack.Screen name="Produtos" component={Home} />
       <Stack.Screen
-        options={({ route }) => ({
+        options={({ route, navigation }) => ({
           headerTitle: getTitulo(route),
+          headerRight: () => aparecerBotao(route, navigation),
         })}
         name="Informações"
         component={TabInformacoes}
       />
+      <Stack.Screen name="Cadastro" component={CadastroComentario} />
     </Stack.Navigator>
   );
 }
