@@ -4,21 +4,23 @@ import { StyleSheet, RefreshControl, Text, View, FlatList } from "react-native";
 
 import CardComentario from "../../components/CardComentario";
 
-import { getComentarios } from "../../service/Servico";
+import { getComentarios, removerComentario } from "../../service/Servico";
 
 import { getId } from "../../service/Servico";
-import { pegar_estado } from "../../service/Servico";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Comentarios({ navigation }) {
   const id = getId();
   const [comentarios, setComentarios] = useState([]);
 
-  useEffect(() => {
-    getComentarios(id).then((comentarios) => {
-      console.log(comentarios);
-      setComentarios(comentarios);
-    });
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      getComentarios(id).then((comentarios) => {
+        console.log(comentarios);
+        setComentarios(comentarios);
+      });
+    }, [])
+  );
 
   var pegarProduto = ({ item }) => {
     return (
@@ -28,17 +30,13 @@ export default function Comentarios({ navigation }) {
         comentario={item.comentario}
         nome={item.nome}
         estrelas={item.estrelas}
+        funcao={removerComentario(id, item.id)}
       />
     );
   };
 
   return (
-    <View
-      style={styles.container}
-      refreshControl={
-        <RefreshControl refreshing={false} onRefresh={pegar_estado} />
-      }
-    >
+    <View style={styles.container}>
       <StatusBar style="auto" />
       <FlatList
         style={styles.flatlist}

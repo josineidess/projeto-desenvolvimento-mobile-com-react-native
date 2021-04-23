@@ -4,6 +4,7 @@ import { StyleSheet, Text, TextInput, View, FlatList } from "react-native";
 import { Button } from "react-native-paper";
 import { cadastrarComentario } from "../../service/Servico";
 import { getId } from "../../service/Servico";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function CadastroComentario(props) {
   const [nome, setNome] = useState("");

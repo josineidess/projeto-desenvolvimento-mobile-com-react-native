@@ -212,10 +212,10 @@ app.post("/produtos/:id/comentarios", (req, res) => {
   res.status(200).send(produtos);
 });
 
-app.delete("/produtos/:id", (req, res) => {
-  produtos = produtos.filter((produto) => produto.id != req.params.id);
-  console.log("Produto apagado!");
-  res.send(produtos);
+app.delete("/produtos/:id/comentarios/:idcomentario", (req, res) => {
+  comentarios = comentarios.filter((comentario) => comentario.id != req.params.idcomentario);
+  console.log("Comentario apagado!");
+  res.send(comentarios);
 });
 
 app.listen(port, () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Button, Text, View } from "react-native";
 import { Card, Title, Paragraph } from "react-native-paper";
 
 export default function Produto(props) {
@@ -19,6 +19,7 @@ export default function Produto(props) {
           ></Card.Cover>
           <View style={styles.informacoes}>
             <Title style={styles.nome_autor}>{props.nome}</Title>
+            <Button onPress={() => props.fucao} title="X"></Button>
             <Text style={styles.comentario}>{props.comentario}</Text>
             <Paragraph style={styles.estrelas}>{estrelas}</Paragraph>
           </View>

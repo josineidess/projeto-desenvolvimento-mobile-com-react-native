@@ -23,27 +23,34 @@ export async function cadastrarComentario(comentario, navigation) {
     comentario
   );
   console.log("comentario postado");
-  atualizar();
   navigation.navigate("Comentarios");
   return comentarios.data;
 }
 
-export function atualizar(estado) {
-  estado = true;
+export async function removerComentario(id, idcomentario) {
+  console.log(id);
+  const apagar = await axios.delete(
+    "http://192.168.0.106:3000/produtos/" + id + "/comentarios/" + idcomentario
+  );
+  console.log(idcomentario);
+  return apagar.data;
 }
-
-export function pegar_estado() {
-  return estado;
-}
-
-var estado = false;
 
 var id = "1";
+var idComentario = "1";
 
 export function getId() {
   return id;
 }
 
+export function getIdComentario() {
+  return idComentario;
+}
+
 export function mudarId(novo_id) {
   id = novo_id;
+}
+
+export function mudarIdComentario(novo_id) {
+  idComentario = novo_id;
 }
