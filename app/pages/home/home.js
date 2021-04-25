@@ -1,12 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
-
 import CardProduto from "../../components/CardProduto";
 
 import { getProdutos } from "../../service/Servico";
 
-export default function Home({ navigation }) {
+export default function Home({ navigation, route }) {
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {

@@ -18,8 +18,14 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
 import { Rating, AirbnbRating } from "react-native-ratings";
+import { pegar_carregamento, mudar_carregamento } from "../../service/Servico";
 
 export default function CadastroComentario(props) {
+  if (pegar_carregamento()) {
+    mudar_carregamento();
+    props.navigation.navigate("Comentarios");
+  }
+
   const [nome, setNome] = useState("");
   const [comentario, setComentario] = useState("");
   const [estrelas, setEstrelas] = useState(1);

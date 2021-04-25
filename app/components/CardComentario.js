@@ -77,8 +77,9 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   btn: {
-    left: "95%",
-    width: 40,
+    left: "93%",
+    width: 50,
+    height: 50,
     top: "3%",
   },
 });

@@ -34,8 +34,9 @@ export async function removerComentario(id, idcomentario, navigation) {
   const apagar = await axios.delete(
     "http://192.168.0.106:3000/produtos/" + id + "/comentarios/" + idcomentario
   );
+  mudar_carregamento();
+  navigation.navigate("Cadastro");
   alert("Comentario apagado!");
-  navigation.navigate("Comentarios");
   console.log(idcomentario);
   return apagar.data;
 }
@@ -54,6 +55,15 @@ export function sortear_foto() {
   return images[sorteado];
 }
 
+export function pegar_carregamento() {
+  return carregar;
+}
+
+export function mudar_carregamento() {
+  carregar = !carregar;
+}
+
+var carregar = false;
 var sorteado = 1;
 var id = "1";
 var idComentario = 15;

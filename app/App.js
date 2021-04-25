@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, LogBox } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
@@ -61,6 +61,7 @@ function MyStack() {
 }
 
 export default function App() {
+  //LogBox.ignoreAllLogs();
   return (
     <NavigationContainer>
       <MyStack />
