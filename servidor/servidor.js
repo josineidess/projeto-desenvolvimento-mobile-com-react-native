@@ -213,7 +213,9 @@ app.post("/produtos/:id/comentarios", (req, res) => {
 });
 
 app.delete("/produtos/:id/comentarios/:idcomentario", (req, res) => {
-  comentarios = comentarios.filter((comentario) => comentario.id != req.params.idcomentario);
+  comentarios = comentarios.filter(
+    (comentario) => comentario.id != req.params.idcomentario
+  );
   console.log("Comentario apagado!");
   res.send(comentarios);
 });

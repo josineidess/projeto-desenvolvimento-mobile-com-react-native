@@ -1,38 +1,64 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, TextInput, View, FlatList } from "react-native";
+import { sortear_foto } from "../../service/Servico";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  FlatList,
+  SectionList,
+} from "react-native";
 import { Button } from "react-native-paper";
 import { cadastrarComentario } from "../../service/Servico";
 import { getId } from "../../service/Servico";
+import { getIdComentario } from "../../service/Servico";
 import { useFocusEffect } from "@react-navigation/native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { Input } from "react-native-elements";
+import { Rating, AirbnbRating } from "react-native-ratings";
 
 export default function CadastroComentario(props) {
   const [nome, setNome] = useState("");
   const [comentario, setComentario] = useState("");
+  const [estrelas, setEstrelas] = useState(1);
+
+  function pegar_estrelas(rating) {
+    setEstrelas(rating);
+  }
 
   return (
     <View style={styles.container}>
-      <Text>Nome</Text>
-      <TextInput style={styles.input} onChangeText={setNome} value={nome} />
-
-      <Text>comentario</Text>
-      <TextInput
+      <Input
+        leftIcon={<Icon name="user" size={24} color="black" />}
+        onChangeText={setNome}
+        value={nome}
         style={styles.input}
+      />
+      <View style={styles.comentarioTxt}>
+        <Icon style={{ left: 10 }} name="comments" size={24} color="black" />
+        <Text style={{ left: 20 }}>Comentário</Text>
+      </View>
+      <TextInput
+        style={styles.caixaComentario}
         onChangeText={setComentario}
         value={comentario}
       />
+      <Text>Avaliação</Text>
 
+      <Rating onFinishRating={pegar_estrelas} style={{ paddingVertical: 10 }} />
       <Button
         title="Cadastrar"
         onPress={() =>
           cadastrarComentario(
             {
-              id: getId(),
+              id: getIdComentario(),
               idProduto: getId(),
               nome: nome,
-              foto: "https://image.flaticon.com/icons/png/512/16/16410.png",
+              foto: sortear_foto(),
               comentario: comentario,
-              estrelas: 4,
+              estrelas: estrelas,
             },
             props.navigation
           )
@@ -47,13 +73,22 @@ export default function CadastroComentario(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "red",
+    backgroundColor: "white",
     paddingTop: 25,
     padding: 10,
   },
   input: {
     height: 40,
     margin: 12,
+    borderRadius: 15,
+  },
+  comentarioTxt: {
+    flexDirection: "row",
+  },
+  caixaComentario: {
+    height: 150,
     borderWidth: 1,
+    borderRadius: 10,
+    marginTop: 20,
   },
 });

@@ -30,7 +30,7 @@ export default function Comentarios({ navigation }) {
         comentario={item.comentario}
         nome={item.nome}
         estrelas={item.estrelas}
-        funcao={removerComentario(id, item.id)}
+        //funcao={removerComentario(id, item.id)}
       />
     );
   };
