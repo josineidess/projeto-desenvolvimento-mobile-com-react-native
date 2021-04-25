@@ -4,10 +4,19 @@ import { StyleSheet, RefreshControl, Text, View, FlatList } from "react-native";
 
 import CardComentario from "../../components/CardComentario";
 
-import { getComentarios, removerComentario } from "../../service/Servico";
+import {
+  getId,
+  getIdComentario,
+  getComentarios,
+  removerComentario,
+} from "../../service/Servico";
 
-import { getId } from "../../service/Servico";
 import { useFocusEffect } from "@react-navigation/native";
+
+export function useForceUpdate() {
+  const [value, setValue] = useState(0); // integer state
+  return () => setValue((value) => value + 1); // update the state to force render
+}
 
 export default function Comentarios({ navigation }) {
   const id = getId();
@@ -26,11 +35,12 @@ export default function Comentarios({ navigation }) {
     return (
       <CardComentario
         id={item.id}
+        idProduto={item.idProduto}
         foto={item.foto}
         comentario={item.comentario}
         nome={item.nome}
         estrelas={item.estrelas}
-        //funcao={removerComentario(id, item.id)}
+        navigation={navigation}
       />
     );
   };

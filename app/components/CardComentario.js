@@ -1,17 +1,35 @@
 import React from "react";
-import { StyleSheet, Button, Text, View } from "react-native";
+import {
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+  StyleSheet,
+  Button,
+  Text,
+  View,
+} from "react-native";
 import { Card, Title, Paragraph } from "react-native-paper";
+import { Rating, AirbnbRating } from "react-native-ratings";
+import { removerComentario } from "../service/Servico";
 
-export default function Produto(props) {
-  let estrelas = "";
-
-  for (let e = 0; e < props.estrelas; e++) {
-    estrelas += "🌟";
-  }
+export default function CardComentario(props) {
+  let hid = false;
+  let stars = Number(props.estrelas);
+  //for (let e = 0; e < props.estrelas; e++) {
+  //estrelas += "🌟";
+  //}
 
   return (
     <View style={styles.container}>
       <Card style={styles.card}>
+        <View style={styles.btn}>
+          <Button
+            color="blue"
+            onPress={() =>
+              removerComentario(props.idProduto, props.id, props.navigation)
+            }
+            title="X"
+          ></Button>
+        </View>
         <Card.Content style={styles.card}>
           <Card.Cover
             style={styles.image}
@@ -19,9 +37,10 @@ export default function Produto(props) {
           ></Card.Cover>
           <View style={styles.informacoes}>
             <Title style={styles.nome_autor}>{props.nome}</Title>
-            <Button onPress={() => props.fucao} title="X"></Button>
             <Text style={styles.comentario}>{props.comentario}</Text>
-            <Paragraph style={styles.estrelas}>{estrelas}</Paragraph>
+            <TouchableOpacity activeOpacity={0.7} disabled={true}>
+              <Rating startingValue={stars} style={{ paddingVertical: 10 }} />
+            </TouchableOpacity>
           </View>
         </Card.Content>
       </Card>
@@ -56,5 +75,10 @@ const styles = StyleSheet.create({
   comentario: {
     color: "blue",
     fontStyle: "italic",
+  },
+  btn: {
+    left: "95%",
+    width: 40,
+    top: "3%",
   },
 });

@@ -206,14 +206,17 @@ app.get("/produtos/:id/comentarios", function (req, res) {
 app.post("/produtos/:id/comentarios", (req, res) => {
   console.log(req.body);
   const novo_comentario = req.body;
-  novo_comentario.id = String(comentarios.length + 1);
   novo_comentario.idProduto = String(req.params.id);
   comentarios.push(novo_comentario);
   res.status(200).send(produtos);
 });
 
 app.delete("/produtos/:id/comentarios/:idcomentario", (req, res) => {
-  comentarios = comentarios.filter(
+   comentarios.forEach((element) =>{
+	   if(element.id == req.params.idcomentario){
+	     console.log(element)
+	   }});
+   comentarios = comentarios.filter(
     (comentario) => comentario.id != req.params.idcomentario
   );
   console.log("Comentario apagado!");

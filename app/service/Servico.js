@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useForceUpdate } from "../pages/comentarios/comentarios";
 
 export async function getProdutos() {
   const produtos = await axios.get("http://192.168.0.106:3000/produtos");
@@ -28,11 +29,13 @@ export async function cadastrarComentario(comentario, navigation) {
   return comentarios.data;
 }
 
-export async function removerComentario(id, idcomentario) {
+export async function removerComentario(id, idcomentario, navigation) {
   console.log(id);
   const apagar = await axios.delete(
     "http://192.168.0.106:3000/produtos/" + id + "/comentarios/" + idcomentario
   );
+  alert("Comentario apagado!");
+  navigation.navigate("Comentarios");
   console.log(idcomentario);
   return apagar.data;
 }
