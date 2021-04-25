@@ -38,9 +38,18 @@ export default function CardComentario(props) {
           <View style={styles.informacoes}>
             <Title style={styles.nome_autor}>{props.nome}</Title>
             <Text style={styles.comentario}>{props.comentario}</Text>
-            <TouchableOpacity activeOpacity={0.7} disabled={true}>
-              <Rating startingValue={stars} style={{ paddingVertical: 10 }} />
-            </TouchableOpacity>
+            <View>
+              <Rating
+                readonly
+                activeOpacity
+                startingValue={stars}
+                imageSize={25}
+                style={{
+                  paddingVertical: 10,
+                  paddingRight: 120,
+                }}
+              />
+            </View>
           </View>
         </Card.Content>
       </Card>
@@ -77,7 +86,7 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   btn: {
-    left: "93%",
+    left: "90%",
     width: 50,
     height: 50,
     top: "3%",

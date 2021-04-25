@@ -83,7 +83,6 @@ export default function CadastroComentario(props) {
 
       <Rating
         onFinishRating={pegar_estrelas}
-        ratingBackgroundColor="blue"
         style={{ paddingVertical: 10, backgroundColor: "blue", top: "5%" }}
       />
       <View
