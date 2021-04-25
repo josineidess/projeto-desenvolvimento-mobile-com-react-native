@@ -12,11 +12,13 @@ import {
   AdMobInterstitial,
   AdMobRewarded,
 } from "expo-ads-admob";
+
 import Home from "./pages/home/home";
 import TabInformacoes from "./pages/tabinfomacoes/tabinformacoes";
 import { Button } from "react-native-paper";
 import { enviar_comentario } from "./pages/cadastro/cadastro";
 import CadastroComentario from "./pages/cadastro/cadastro";
+import { useNavigation } from "@react-navigation/core";
 
 const Stack = createStackNavigator();
 
@@ -60,13 +62,7 @@ function MyStack() {
         name="Informações"
         component={TabInformacoes}
       />
-      <Stack.Screen
-        name="Cadastro"
-        options={{
-          title: "Adicionar Comentário",
-        }}
-        component={CadastroComentario}
-      />
+      <Stack.Screen name="Cadastro" component={CadastroComentario} />
     </Stack.Navigator>
   );
 }

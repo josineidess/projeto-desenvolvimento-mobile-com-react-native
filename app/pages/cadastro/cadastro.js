@@ -19,16 +19,43 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Input } from "react-native-elements";
 import { Rating, AirbnbRating } from "react-native-ratings";
 import { pegar_carregamento, mudar_carregamento } from "../../service/Servico";
+import { useNavigation } from "@react-navigation/core";
 
 export default function CadastroComentario(props) {
+  const navigation = useNavigation();
   if (pegar_carregamento()) {
     mudar_carregamento();
     props.navigation.navigate("Comentarios");
   }
-
   const [nome, setNome] = useState("");
   const [comentario, setComentario] = useState("");
   const [estrelas, setEstrelas] = useState(1);
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: "Adicionar comentário",
+      headerRight: () => (
+        <Ionicons
+          onPress={() =>
+            cadastrarComentario(
+              {
+                id: getIdComentario(),
+                idProduto: getId(),
+                nome: nome,
+                foto: sortear_foto(),
+                comentario: comentario,
+                estrelas: estrelas,
+              },
+              props.navigation
+            )
+          }
+          name="checkbox-outline"
+          color="green"
+          size={40}
+        />
+      ),
+    });
+  });
 
   function pegar_estrelas(rating) {
     setEstrelas(rating);
@@ -48,6 +75,7 @@ export default function CadastroComentario(props) {
       </View>
       <TextInput
         style={styles.caixaComentario}
+        multiline
         onChangeText={setComentario}
         value={comentario}
       />
@@ -66,25 +94,7 @@ export default function CadastroComentario(props) {
           height: 60,
           left: "30%",
         }}
-      >
-        <Button
-          title="Postar"
-          color="#191970"
-          onPress={() =>
-            cadastrarComentario(
-              {
-                id: getIdComentario(),
-                idProduto: getId(),
-                nome: nome,
-                foto: sortear_foto(),
-                comentario: comentario,
-                estrelas: estrelas,
-              },
-              props.navigation
-            )
-          }
-        />
-      </View>
+      ></View>
     </View>
   );
 }

@@ -36,7 +36,7 @@ export async function removerComentario(id, idcomentario, navigation) {
   );
   mudar_carregamento();
   navigation.navigate("Cadastro");
-  alert("Comentario apagado!");
+  //alert("Comentario apagado!");
   console.log(idcomentario);
   return apagar.data;
 }
