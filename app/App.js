@@ -1,16 +1,21 @@
 import React from "react";
-import { StyleSheet, LogBox } from "react-native";
+import { StyleSheet, LogBox, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   NavigationContainer,
   getFocusedRouteNameFromRoute,
 } from "@react-navigation/native";
-
+import {
+  PublisherBanner,
+  AdMobBanner,
+  AdMobInterstitial,
+  AdMobRewarded,
+} from "expo-ads-admob";
 import Home from "./pages/home/home";
 import TabInformacoes from "./pages/tabinfomacoes/tabinformacoes";
 import { Button } from "react-native-paper";
-
+import { enviar_comentario } from "./pages/cadastro/cadastro";
 import CadastroComentario from "./pages/cadastro/cadastro";
 
 const Stack = createStackNavigator();
@@ -55,13 +60,19 @@ function MyStack() {
         name="Informações"
         component={TabInformacoes}
       />
-      <Stack.Screen name="Cadastro" component={CadastroComentario} />
+      <Stack.Screen
+        name="Cadastro"
+        options={{
+          title: "Adicionar Comentário",
+        }}
+        component={CadastroComentario}
+      />
     </Stack.Navigator>
   );
 }
 
 export default function App() {
-  //LogBox.ignoreAllLogs();
+  LogBox.ignoreAllLogs();
   return (
     <NavigationContainer>
       <MyStack />
